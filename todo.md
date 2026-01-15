@@ -98,3 +98,13 @@
 - [x] Implementar navegación por secciones
 - [x] Agregar velocidad de reproducción ajustable
 - [x] Crear pantalla de reproductor con transcripción sincronizada
+
+
+## Fase 12: Exportación a PDF (NUEVO)
+- [x] Crear servicio de generación de PDF con transcripción
+- [x] Incluir marcas de tiempo en PDF
+- [x] Agregar información de secciones y notas de entonación
+- [x] Implementar compartir PDF
+- [x] Crear botón de exportación en pantalla de transcripción
+- [x] Agregar opciones de formato (vertical, horizontal)
+- [x] Incluir metadatos de grabación (fecha, duración, confianza)

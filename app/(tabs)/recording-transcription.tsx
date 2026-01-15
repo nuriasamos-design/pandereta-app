@@ -4,6 +4,8 @@ import { useStorage } from "@/lib/storage-context";
 import { useColors } from "@/hooks/use-colors";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useState, useEffect } from "react";
+import { ExportModal } from "@/components/export-modal";
+import { calculateSectionTimestamps } from "@/lib/audio-sync-service";
 import * as Haptics from "expo-haptics";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
@@ -23,6 +25,7 @@ export default function RecordingTranscriptionScreen() {
   const [selectedSection, setSelectedSection] = useState<SongSection | null>(null);
   const [editMode, setEditMode] = useState(false);
   const [view, setView] = useState<"transcription" | "edit-section" | "preview">("transcription");
+  const [showExportModal, setShowExportModal] = useState(false);
 
   useEffect(() => {
     if (recordingId && typeof recordingId === "string") {
@@ -229,18 +232,31 @@ export default function RecordingTranscriptionScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1 px-6 py-6">
-        {/* Botón de Reproductor */}
+        {/* Botones de Acción */}
         {transcription && (
-          <Pressable
-            onPress={() => router.push(`/(tabs)/audio-player?recordingId=${recording.id}` as any)}
-            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
-            className="bg-primary rounded-lg py-3 items-center justify-center mb-6"
-          >
-            <View className="flex-row items-center gap-2">
-              <IconSymbol name="play.fill" size={20} color="white" />
-              <Text className="text-white font-semibold">Abrir Reproductor Sincronizado</Text>
-            </View>
-          </Pressable>
+          <View className="gap-3 mb-6">
+            <Pressable
+              onPress={() => router.push(`/(tabs)/audio-player?recordingId=${recording.id}` as any)}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+              className="bg-primary rounded-lg py-3 items-center justify-center"
+            >
+              <View className="flex-row items-center gap-2">
+                <IconSymbol name="play.fill" size={20} color="white" />
+                <Text className="text-white font-semibold">Abrir Reproductor</Text>
+              </View>
+            </Pressable>
+
+            <Pressable
+              onPress={() => setShowExportModal(true)}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+              className="bg-success rounded-lg py-3 items-center justify-center"
+            >
+              <View className="flex-row items-center gap-2">
+                <IconSymbol name="arrow.down.doc" size={20} color="white" />
+                <Text className="text-white font-semibold">Exportar PDF</Text>
+              </View>
+            </Pressable>
+          </View>
         )}
 
         {!transcription ? (
@@ -347,6 +363,17 @@ export default function RecordingTranscriptionScreen() {
           </>
         )}
       </ScrollView>
+
+      {/* Modal de Exportación */}
+      {transcription && recording && (
+        <ExportModal
+          visible={showExportModal}
+          onClose={() => setShowExportModal(false)}
+          recording={recording}
+          transcription={transcription}
+          sections={calculateSectionTimestamps(transcription, recording.duration)}
+        />
+      )}
     </ScreenContainer>
   );
 }
