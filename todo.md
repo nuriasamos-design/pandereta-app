@@ -87,3 +87,14 @@
 - [x] Permitir edición de transcripciones
 - [x] Vincular transcripciones a grabaciones guardadas
 - [x] Agregar notas de entonación en transcripciones
+
+
+## Fase 11: Reproductor Sincronizado (NUEVO)
+- [x] Crear servicio de sincronización de audio y texto
+- [x] Implementar reproductor de audio con controles (play, pause, stop)
+- [x] Agregar visualización de onda de audio
+- [x] Resaltar texto en tiempo real según posición de reproducción
+- [x] Crear barra de progreso interactiva
+- [x] Implementar navegación por secciones
+- [x] Agregar velocidad de reproducción ajustable
+- [x] Crear pantalla de reproductor con transcripción sincronizada

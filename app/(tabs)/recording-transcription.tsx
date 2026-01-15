@@ -6,7 +6,9 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useState, useEffect } from "react";
 import * as Haptics from "expo-haptics";
 import { useRouter, useLocalSearchParams } from "expo-router";
+
 import { Recording, RecordingTranscription, SongSection } from "@/lib/types";
+import { View as RNView } from "react-native";
 import { processRecordingTranscription, formatTranscriptionForDisplay, updateTranscriptionNotes, updateTranscriptionSectionText } from "@/lib/transcription-service";
 
 export default function RecordingTranscriptionScreen() {
@@ -227,6 +229,20 @@ export default function RecordingTranscriptionScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1 px-6 py-6">
+        {/* Botón de Reproductor */}
+        {transcription && (
+          <Pressable
+            onPress={() => router.push(`/(tabs)/audio-player?recordingId=${recording.id}` as any)}
+            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            className="bg-primary rounded-lg py-3 items-center justify-center mb-6"
+          >
+            <View className="flex-row items-center gap-2">
+              <IconSymbol name="play.fill" size={20} color="white" />
+              <Text className="text-white font-semibold">Abrir Reproductor Sincronizado</Text>
+            </View>
+          </Pressable>
+        )}
+
         {!transcription ? (
           <View className="items-center justify-center flex-1">
             <View className="bg-surface rounded-full p-6 mb-4">
