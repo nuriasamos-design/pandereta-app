@@ -70,3 +70,20 @@
 - [ ] Optimizar rendimiento
 - [ ] Corregir bugs identificados
 - [ ] Crear checkpoint final
+
+
+## Fase 9: OCR y Edición de Canciones (NUEVO)
+- [x] Integrar OCR (Tesseract o Google Vision API) para convertir fotos en texto
+- [x] Crear pantalla de edición de canciones con estructura de estrofas/estribillos
+- [x] Implementar editor de texto con soporte para notas de entonación
+- [x] Agregar vista previa de canción formateada
+- [x] Permitir corrección y edición manual de texto OCR
+- [x] Guardar canciones con metadatos de estructura (estrofa, estribillo, verso)
+
+## Fase 10: Transcripción de Audio (NUEVO)
+- [x] Integrar API de speech-to-text (Google Cloud Speech o similar)
+- [x] Crear funcionalidad de transcripción de grabaciones
+- [x] Implementar pantalla de reproducción con transcripción sincronizada
+- [x] Permitir edición de transcripciones
+- [x] Vincular transcripciones a grabaciones guardadas
+- [x] Agregar notas de entonación en transcripciones

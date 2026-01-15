@@ -125,7 +125,7 @@ export default function LibraryScreen() {
 
   const renderSongItem = ({ item }: { item: Song }) => (
     <Pressable
-      onPress={() => router.push(`/(tabs)/library?id=${item.id}` as any)}
+      onPress={() => router.push(`/(tabs)/song-editor?songId=${item.id}` as any)}
       style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
       className="bg-surface rounded-lg p-4 mb-3 flex-row items-center gap-3"
     >

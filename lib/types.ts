@@ -8,18 +8,39 @@
 export type SongSource = 'photo' | 'pdf' | 'web' | 'manual';
 
 /**
+ * Tipo de sección en una canción
+ */
+export type SectionType = 'estrofa' | 'estribillo' | 'verso' | 'puente' | 'intro' | 'outro';
+
+/**
+ * Estructura de una estrofa o estribillo
+ */
+export interface SongSection {
+  id: string;
+  type: SectionType;
+  title?: string;
+  lyrics: string;
+  notes?: string;
+  order: number;
+}
+
+/**
  * Canción en la biblioteca
  */
 export interface Song {
   id: string;
   title: string;
   source: SongSource;
-  imageUri?: string; // URI local de foto/PDF
-  webUrl?: string; // URL si fue importada de web
-  notes?: string; // Notas personales del usuario
-  createdAt: number; // Timestamp
-  updatedAt: number; // Timestamp
-  tags?: string[]; // Etiquetas personalizadas
+  imageUri?: string;
+  webUrl?: string;
+  notes?: string;
+  createdAt: number;
+  updatedAt: number;
+  tags?: string[];
+  sections?: SongSection[];
+  fullText?: string;
+  ocrProcessed?: boolean;
+  ocrRawText?: string;
 }
 
 /**
@@ -27,10 +48,24 @@ export interface Song {
  */
 export interface ClassSession {
   id: string;
-  date: number; // Timestamp del día
-  songIds: string[]; // IDs de canciones tocadas en esa clase
+  date: number;
+  songIds: string[];
   notes?: string;
   createdAt: number;
+}
+
+/**
+ * Transcripción de una grabación
+ */
+export interface RecordingTranscription {
+  id: string;
+  recordingId: string;
+  text: string;
+  sections?: SongSection[];
+  confidence?: number;
+  createdAt: number;
+  updatedAt: number;
+  notes?: string;
 }
 
 /**
@@ -38,13 +73,15 @@ export interface ClassSession {
  */
 export interface Recording {
   id: string;
-  uri: string; // URI local del archivo de audio
-  duration: number; // Duración en ms
-  createdAt: number; // Timestamp
-  classSessionId?: string; // ID de la clase asociada (opcional)
-  songId?: string; // ID de la canción asociada (opcional)
+  uri: string;
+  duration: number;
+  createdAt: number;
+  classSessionId?: string;
+  songId?: string;
   notes?: string;
-  type: 'class' | 'practice' | 'free'; // Tipo de grabación
+  type: 'class' | 'practice' | 'free';
+  transcriptionId?: string;
+  transcription?: RecordingTranscription;
 }
 
 /**
@@ -54,11 +91,11 @@ export interface Rhythm {
   id: string;
   name: string;
   description: string;
-  level: 1 | 2 | 3 | 4 | 5; // Nivel de dificultad
-  bpm: number; // Tempo base
-  pattern: string; // Descripción del patrón (ej: "1-2-3-4")
-  audioUri?: string; // URI del audio de guía
-  type: 'basic' | 'intermediate' | 'song'; // Tipo de ritmo
+  level: 1 | 2 | 3 | 4 | 5;
+  bpm: number;
+  pattern: string;
+  audioUri?: string;
+  type: 'basic' | 'intermediate' | 'song';
 }
 
 /**
@@ -67,9 +104,9 @@ export interface Rhythm {
 export interface PracticeSession {
   id: string;
   rhythmId: string;
-  bpm: number; // BPM actual
+  bpm: number;
   level: 1 | 2 | 3 | 4 | 5;
-  recordingId?: string; // Grabación de la práctica
+  recordingId?: string;
   startedAt: number;
   completedAt?: number;
   notes?: string;
@@ -80,7 +117,7 @@ export interface PracticeSession {
  */
 export interface AppSettings {
   theme: 'light' | 'dark' | 'auto';
-  microphoneVolume: number; // 0-1
+  microphoneVolume: number;
   recordingQuality: 'low' | 'medium' | 'high';
   hapticFeedback: boolean;
   soundEnabled: boolean;
@@ -92,8 +129,8 @@ export interface AppSettings {
 export interface PracticeStats {
   rhythmId: string;
   totalSessions: number;
-  totalDuration: number; // en ms
+  totalDuration: number;
   averageBpm: number;
-  lastPracticed: number; // timestamp
+  lastPracticed: number;
   level: 1 | 2 | 3 | 4 | 5;
 }

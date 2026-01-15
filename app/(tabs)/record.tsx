@@ -8,8 +8,10 @@ import * as Haptics from "expo-haptics";
 import * as Audio from "expo-audio";
 import { Recording } from "@/lib/types";
 import * as FileSystem from "expo-file-system/legacy";
+import { useRouter } from "expo-router";
 
 export default function RecordScreen() {
+  const router = useRouter();
   const { songs, recordings, addRecording, addClassSession } = useStorage();
   const colors = useColors();
   const [isRecording, setIsRecording] = useState(false);
@@ -107,6 +109,23 @@ export default function RecordScreen() {
     const secs = seconds % 60;
     return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
+
+  const renderRecordingItem = ({ item }: { item: Recording }) => (
+    <Pressable
+      onPress={() => router.push(`/(tabs)/recording-transcription?recordingId=${item.id}` as any)}
+      style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+      className="bg-surface rounded-lg p-4 mb-3 flex-row items-center gap-3"
+    >
+      <View className="bg-error/10 rounded-lg p-2">
+        <IconSymbol name="mic.fill" size={20} color={colors.error} />
+      </View>
+      <View className="flex-1">
+        <Text className="text-foreground font-semibold">{Math.round(item.duration / 1000)}s</Text>
+        <Text className="text-muted text-xs">{new Date(item.createdAt).toLocaleDateString("es-ES")}</Text>
+      </View>
+      <IconSymbol name="chevron.right" size={20} color={colors.muted} />
+    </Pressable>
+  );
 
   const renderSongItem = ({ item }: { item: any }) => (
     <Pressable
