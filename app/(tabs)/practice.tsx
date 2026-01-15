@@ -2,6 +2,7 @@ import { ScrollView, Text, View, Pressable, FlatList } from "react-native";
 import { ScreenContainer } from "@/components/screen-container";
 import { useColors } from "@/hooks/use-colors";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Link } from "expo-router";
 import { useState, useEffect, useRef } from "react";
 import * as Haptics from "expo-haptics";
 import { Rhythm } from "@/lib/types";
@@ -264,22 +265,30 @@ export default function PracticeScreen() {
           </Pressable>
 
           {/* Recording Button */}
-          <Pressable
-            style={({ pressed }) => [
-              {
-                opacity: pressed ? 0.9 : 1,
-                transform: [{ scale: pressed ? 0.97 : 1 }],
-              },
-            ]}
-            className="rounded-full py-4 items-center justify-center border-2 border-primary"
+          <Link
+            href={{
+              pathname: '/practice-recording',
+              params: { rhythmId: selectedRhythm.id, bpm: bpm.toString() },
+            }}
+            asChild
           >
-            <View className="flex-row items-center gap-2">
-              <IconSymbol name="mic.fill" size={24} color={colors.primary} />
-              <Text className="text-primary font-semibold text-lg">
-                Grabar Práctica
-              </Text>
-            </View>
-          </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.9 : 1,
+                  transform: [{ scale: pressed ? 0.97 : 1 }],
+                },
+              ]}
+              className="rounded-full py-4 items-center justify-center border-2 border-primary"
+            >
+              <View className="flex-row items-center gap-2">
+                <IconSymbol name="mic.fill" size={24} color={colors.primary} />
+                <Text className="text-primary font-semibold text-lg">
+                  Grabar Práctica
+                </Text>
+              </View>
+            </Pressable>
+          </Link>
         </ScrollView>
       </ScreenContainer>
     );
