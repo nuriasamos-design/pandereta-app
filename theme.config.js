@@ -1,14 +1,16 @@
 /** @type {const} */
 const themeColors = {
-  primary: { light: '#0a7ea4', dark: '#0a7ea4' },
-  background: { light: '#ffffff', dark: '#151718' },
-  surface: { light: '#f5f5f5', dark: '#1e2022' },
-  foreground: { light: '#11181C', dark: '#ECEDEE' },
-  muted: { light: '#687076', dark: '#9BA1A6' },
-  border: { light: '#E5E7EB', dark: '#334155' },
-  success: { light: '#22C55E', dark: '#4ADE80' },
-  warning: { light: '#F59E0B', dark: '#FBBF24' },
-  error: { light: '#EF4444', dark: '#F87171' },
+  primary: { light: '#E91E63', dark: '#E91E63' }, // Rosa vibrante para pandereta
+  secondary: { light: '#2196F3', dark: '#2196F3' }, // Azul
+  background: { light: '#ffffff', dark: '#121212' },
+  surface: { light: '#F5F5F5', dark: '#1E1E1E' },
+  foreground: { light: '#212121', dark: '#FFFFFF' },
+  muted: { light: '#757575', dark: '#BDBDBD' },
+  border: { light: '#E0E0E0', dark: '#424242' },
+  success: { light: '#4CAF50', dark: '#81C784' },
+  warning: { light: '#FF9800', dark: '#FFB74D' },
+  error: { light: '#F44336', dark: '#EF5350' },
+  recording: { light: '#FF1744', dark: '#FF1744' }, // Rojo para grabación
 };
 
 module.exports = { themeColors };

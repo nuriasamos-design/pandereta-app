@@ -1,0 +1,72 @@
+# Pandereta Master - TODO
+
+## Fase 1: Estructura Base y Navegación
+- [x] Configurar navegación por pestañas (Home, Biblioteca, Grabar, Practicar, Configuración)
+- [x] Crear componentes base: ScreenContainer, Card, Button
+- [x] Implementar tema de colores (rosa #E91E63, azul #2196F3)
+- [ ] Crear logo y actualizar app.config.ts
+
+## Fase 2: Biblioteca de Canciones
+- [x] Crear pantalla de biblioteca con lista de canciones
+- [x] Implementar almacenamiento local (AsyncStorage) para canciones
+- [x] Crear modal de agregar canción
+- [x] Integrar captura de foto (expo-image-picker)
+- [x] Integrar importación de PDF (expo-document-picker)
+- [ ] Implementar búsqueda de canciones en web (API o web scraping)
+- [ ] Crear pantalla de detalle de canción
+- [ ] Implementar edición y eliminación de canciones
+- [x] Agregar búsqueda y filtros en biblioteca
+
+## Fase 3: Sistema de Grabación
+- [x] Crear pantalla de grabación de clase
+- [x] Integrar micrófono (expo-audio)
+- [ ] Implementar grabadora básica (play, pause, stop)
+- [x] Crear almacenamiento de grabaciones
+- [x] Vincular grabaciones a fechas de clase
+- [x] Vincular grabaciones a canciones específicas
+- [ ] Crear pantalla de historial de grabaciones
+- [ ] Implementar reproductor de grabaciones
+- [ ] Agregar indicador de nivel de micrófono
+
+## Fase 4: Reconocimiento de Audio
+- [ ] Investigar opciones de reconocimiento de canciones (Shazam API o similar)
+- [ ] Implementar captura de audio para identificación
+- [ ] Crear interfaz de identificación de canción
+- [ ] Vincular canciones identificadas a biblioteca
+- [ ] Agregar opción de guardar canción identificada
+
+## Fase 5: Sección de Práctica
+- [x] Crear pantalla de selección de práctica
+- [x] Implementar biblioteca de ritmos/toques básicos
+- [x] Crear interfaz de práctica con guía interactiva
+- [x] Implementar selector de velocidad (BPM)
+- [x] Implementar selector de nivel (1-5)
+- [x] Crear metrónomo interactivo
+- [x] Agregar visualización de patrón de ritmo
+- [ ] Implementar grabación de práctica para autoevaluación
+- [ ] Crear sistema de progresión/estadísticas
+
+## Fase 6: Interfaz de Usuario Completa
+- [ ] Implementar navegación fluida entre pantallas
+- [ ] Agregar animaciones y transiciones suaves
+- [ ] Implementar feedback háptico (Haptics)
+- [ ] Crear barra de estado y headers consistentes
+- [ ] Agregar iconos personalizados
+- [ ] Implementar modo oscuro/claro
+- [ ] Optimizar para una mano (tamaños de botones, posicionamiento)
+
+## Fase 7: Configuración y Ajustes
+- [x] Crear pantalla de configuración
+- [x] Implementar selector de tema
+- [x] Agregar control de volumen de micrófono
+- [ ] Crear gestor de permisos (micrófono, cámara, almacenamiento)
+- [x] Agregar información de la app
+
+## Fase 8: Pruebas y Pulido
+- [ ] Probar flujos de usuario completos
+- [ ] Validar almacenamiento de datos
+- [ ] Probar grabación y reproducción de audio
+- [ ] Verificar permisos en iOS y Android
+- [ ] Optimizar rendimiento
+- [ ] Corregir bugs identificados
+- [ ] Crear checkpoint final

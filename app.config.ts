@@ -42,21 +42,27 @@ const config: ExpoConfig = {
   name: env.appName,
   slug: env.appSlug,
   version: "1.0.0",
+  description: "Aprende, practica y graba pandereta con Pandereta Master",
   orientation: "portrait",
   icon: "./assets/images/icon.png",
   scheme: env.scheme,
   userInterfaceStyle: "automatic",
+  primaryColor: "#E91E63",
   newArchEnabled: true,
+  runtimeVersion: "1.0.0",
   ios: {
     supportsTablet: true,
     bundleIdentifier: env.iosBundleId,
-    "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
+    infoPlist: {
+      ITSAppUsesNonExemptEncryption: false,
+      NSMicrophoneUsageDescription: "Pandereta Master necesita acceso al micrófono para grabar tus clases y práctica.",
+      NSPhotoLibraryUsageDescription: "Pandereta Master necesita acceso a tu galería para importar fotos de partituras.",
+      NSCameraUsageDescription: "Pandereta Master necesita acceso a la cámara para capturar fotos de partituras.",
+    },
   },
   android: {
     adaptiveIcon: {
-      backgroundColor: "#E6F4FE",
+      backgroundColor: "#E91E63",
       foregroundImage: "./assets/images/android-icon-foreground.png",
       backgroundImage: "./assets/images/android-icon-background.png",
       monochromeImage: "./assets/images/android-icon-monochrome.png",
@@ -64,7 +70,7 @@ const config: ExpoConfig = {
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
     package: env.androidPackage,
-    permissions: ["POST_NOTIFICATIONS"],
+    permissions: ["POST_NOTIFICATIONS", "CAMERA", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "RECORD_AUDIO"],
     intentFilters: [
       {
         action: "VIEW",
@@ -83,13 +89,14 @@ const config: ExpoConfig = {
     bundler: "metro",
     output: "static",
     favicon: "./assets/images/favicon.png",
+    themeColor: "#E91E63",
   },
   plugins: [
     "expo-router",
     [
       "expo-audio",
       {
-        microphonePermission: "Allow $(PRODUCT_NAME) to access your microphone.",
+        microphonePermission: "Pandereta Master necesita acceso al micrófono para grabar tus clases y práctica.",
       },
     ],
     [
@@ -105,9 +112,9 @@ const config: ExpoConfig = {
         image: "./assets/images/splash-icon.png",
         imageWidth: 200,
         resizeMode: "contain",
-        backgroundColor: "#ffffff",
+        backgroundColor: "#E91E63",
         dark: {
-          backgroundColor: "#000000",
+          backgroundColor: "#121212",
         },
       },
     ],
@@ -124,6 +131,11 @@ const config: ExpoConfig = {
   experiments: {
     typedRoutes: true,
     reactCompiler: true,
+  },
+  extra: {
+    eas: {
+      projectId: "pandereta-app",
+    },
   },
 };
 
