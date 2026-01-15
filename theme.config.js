@@ -1,16 +1,16 @@
 /** @type {const} */
 const themeColors = {
-  primary: { light: '#E91E63', dark: '#E91E63' }, // Rosa vibrante para pandereta
-  secondary: { light: '#2196F3', dark: '#2196F3' }, // Azul
-  background: { light: '#ffffff', dark: '#121212' },
-  surface: { light: '#F5F5F5', dark: '#1E1E1E' },
-  foreground: { light: '#212121', dark: '#FFFFFF' },
-  muted: { light: '#757575', dark: '#BDBDBD' },
-  border: { light: '#E0E0E0', dark: '#424242' },
-  success: { light: '#4CAF50', dark: '#81C784' },
-  warning: { light: '#FF9800', dark: '#FFB74D' },
-  error: { light: '#F44336', dark: '#EF5350' },
-  recording: { light: '#FF1744', dark: '#FF1744' }, // Rojo para grabación
+  primary: { light: '#7C3AED', dark: '#A78BFA' }, // Púrpura vibrante
+  secondary: { light: '#06B6D4', dark: '#22D3EE' }, // Cyan brillante
+  background: { light: '#FAFAFA', dark: '#0F172A' },
+  surface: { light: '#F1F5F9', dark: '#1E293B' },
+  foreground: { light: '#1E293B', dark: '#F1F5F9' },
+  muted: { light: '#64748B', dark: '#94A3B8' },
+  border: { light: '#E2E8F0', dark: '#334155' },
+  success: { light: '#10B981', dark: '#6EE7B7' },
+  warning: { light: '#F59E0B', dark: '#FBBF24' },
+  error: { light: '#EF4444', dark: '#FCA5A5' },
+  recording: { light: '#EC4899', dark: '#F472B6' }, // Rosa para grabación
 };
 
 module.exports = { themeColors };

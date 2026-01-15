@@ -108,3 +108,11 @@
 - [x] Crear botón de exportación en pantalla de transcripción
 - [x] Agregar opciones de formato (vertical, horizontal)
 - [x] Incluir metadatos de grabación (fecha, duración, confianza)
+
+
+## Fase 13: Mejoras de Diseño y Datos de Ejemplo
+- [x] Cambiar esquema de colores a paleta más atractiva
+- [x] Agregar canciones de ejemplo a la biblioteca
+- [x] Crear grabaciones de ejemplo
+- [x] Agregar transcripciones de ejemplo
+- [x] Mejorar interfaz visual general

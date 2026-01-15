@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import React, { createContext, useReducer, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Song, Recording, ClassSession, Rhythm, AppSettings, PracticeSession, PracticeStats } from './types';
+import { initializeSampleData } from './sample-data';
 
 interface StorageState {
   songs: Song[];
@@ -125,9 +126,22 @@ export function StorageProvider({ children }: { children: ReactNode }) {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
       const [songs, recordings, classSessions, rhythms, practiceStats, settings] = await Promise.all([
-        AsyncStorage.getItem('songs').then(data => data ? JSON.parse(data) : []),
-        AsyncStorage.getItem('recordings').then(data => data ? JSON.parse(data) : []),
-        AsyncStorage.getItem('classSessions').then(data => data ? JSON.parse(data) : []),
+        AsyncStorage.getItem('songs').then(data => {
+          if (data) return JSON.parse(data);
+          // Cargar datos de ejemplo si no hay datos guardados
+          const sampleData = initializeSampleData();
+          return sampleData.songs;
+        }),
+        AsyncStorage.getItem('recordings').then(data => {
+          if (data) return JSON.parse(data);
+          const sampleData = initializeSampleData();
+          return sampleData.recordings;
+        }),
+        AsyncStorage.getItem('classSessions').then(data => {
+          if (data) return JSON.parse(data);
+          const sampleData = initializeSampleData();
+          return sampleData.classSessions;
+        }),
         AsyncStorage.getItem('rhythms').then(data => data ? JSON.parse(data) : []),
         AsyncStorage.getItem('practiceStats').then(data => data ? JSON.parse(data) : []),
         AsyncStorage.getItem('settings').then(data => data ? JSON.parse(data) : defaultSettings),
@@ -203,7 +217,7 @@ export function StorageProvider({ children }: { children: ReactNode }) {
       const updated = [...state.classSessions, session];
       await AsyncStorage.setItem('classSessions', JSON.stringify(updated));
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Error al guardar clase' });
+      dispatch({ type: 'SET_ERROR', payload: 'Error al guardar sesión de clase' });
     }
   };
 
@@ -213,7 +227,7 @@ export function StorageProvider({ children }: { children: ReactNode }) {
       const updated = state.classSessions.map(c => c.id === session.id ? session : c);
       await AsyncStorage.setItem('classSessions', JSON.stringify(updated));
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Error al actualizar clase' });
+      dispatch({ type: 'SET_ERROR', payload: 'Error al actualizar sesión de clase' });
     }
   };
 
@@ -232,7 +246,7 @@ export function StorageProvider({ children }: { children: ReactNode }) {
       const updated = state.practiceStats.map(s => s.rhythmId === stats.rhythmId ? stats : s);
       await AsyncStorage.setItem('practiceStats', JSON.stringify(updated));
     } catch (error) {
-      dispatch({ type: 'SET_ERROR', payload: 'Error al actualizar estadísticas' });
+      dispatch({ type: 'SET_ERROR', payload: 'Error al guardar estadísticas' });
     }
   };
 
@@ -258,9 +272,9 @@ export function StorageProvider({ children }: { children: ReactNode }) {
 }
 
 export function useStorage() {
-  const context = useContext(StorageContext);
+  const context = React.useContext(StorageContext);
   if (!context) {
-    throw new Error('useStorage debe usarse dentro de StorageProvider');
+    throw new Error('useStorage debe ser usado dentro de StorageProvider');
   }
   return context;
 }
