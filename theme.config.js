@@ -1,16 +1,17 @@
 /** @type {const} */
 const themeColors = {
-  primary: { light: '#7C3AED', dark: '#A78BFA' }, // Púrpura vibrante
-  secondary: { light: '#06B6D4', dark: '#22D3EE' }, // Cyan brillante
-  background: { light: '#FAFAFA', dark: '#0F172A' },
-  surface: { light: '#F1F5F9', dark: '#1E293B' },
-  foreground: { light: '#1E293B', dark: '#F1F5F9' },
-  muted: { light: '#64748B', dark: '#94A3B8' },
-  border: { light: '#E2E8F0', dark: '#334155' },
-  success: { light: '#10B981', dark: '#6EE7B7' },
-  warning: { light: '#F59E0B', dark: '#FBBF24' },
-  error: { light: '#EF4444', dark: '#FCA5A5' },
-  recording: { light: '#EC4899', dark: '#F472B6' }, // Rosa para grabación
+  // Tonos vainilla principales - armonía suave
+  primary: { light: '#D4A574', dark: '#C9956B' },      // Vainilla dorada
+  background: { light: '#FBF8F3', dark: '#3D3A35' },   // Vainilla muy clara / oscura vainilla
+  surface: { light: '#F5F1E8', dark: '#4A4641' },      // Vainilla clara / gris vainilla
+  foreground: { light: '#5C5449', dark: '#E8E4DB' },   // Marrón vainilla / vainilla clara
+  muted: { light: '#8B8078', dark: '#A89F94' },        // Vainilla media / vainilla media clara
+  border: { light: '#E8DFD3', dark: '#5C5449' },       // Vainilla muy clara / marrón vainilla
+  
+  // Estados - tonos vainilla
+  success: { light: '#A8B89C', dark: '#C4D4B8' },      // Verde vainilla
+  warning: { light: '#C4A876', dark: '#D4B896' },      // Naranja vainilla
+  error: { light: '#B89C8C', dark: '#C8ACAA' },        // Rojo vainilla
 };
 
 module.exports = { themeColors };

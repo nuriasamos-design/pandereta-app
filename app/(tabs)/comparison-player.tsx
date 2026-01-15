@@ -76,9 +76,9 @@ export default function ComparisonPlayerScreen() {
 
   const getDeviationColor = (deviation?: number) => {
     if (!deviation) return colors.muted;
-    if (Math.abs(deviation) < 30) return colors.success;
-    if (Math.abs(deviation) < 75) return '#FFA500';
-    return colors.error;
+    if (Math.abs(deviation) < 30) return '#A8B89C';
+    if (Math.abs(deviation) < 75) return '#C4A876';
+    return '#B89C8C';
   };
 
   const getDeviationLabel = (deviation?: number) => {
@@ -290,7 +290,7 @@ export default function ComparisonPlayerScreen() {
                   {/* Indicador de tipo */}
                   <View
                     className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: event.color }}
+                    style={{ backgroundColor: event.type === 'expected' ? '#D4A574' : '#C9956B' }}
                   />
 
                   {/* Información */}

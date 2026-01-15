@@ -34,27 +34,27 @@ export function VisualMetronome({
   const getPatternBeats = (): BeatVisual[] => {
     if (pattern === 'muineira') {
       return [
-        { id: 0, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
-        { id: 1, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 2, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 3, type: 'pero', label: 'pero', color: '#10B981', intensity: 0.9 },
-        { id: 4, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
-        { id: 5, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 6, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 7, type: 'pero', label: 'pero', color: '#10B981', intensity: 0.9 },
+        { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+        { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 2, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 3, type: 'pero', label: 'pero', color: '#B88456', intensity: 0.9 },
+        { id: 4, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+        { id: 5, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 6, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 7, type: 'pero', label: 'pero', color: '#B88456', intensity: 0.9 },
       ];
     } else if (pattern === 'jota') {
       return [
-        { id: 0, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
-        { id: 1, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 2, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
-        { id: 3, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
-        { id: 4, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
+        { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+        { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 2, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+        { id: 3, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
+        { id: 4, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
       ];
     }
     return [
-      { id: 0, type: 'po', label: 'po', color: '#7C3AED', intensity: 1 },
-      { id: 1, type: 'ro', label: 'ro', color: '#06B6D4', intensity: 0.8 },
+      { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+      { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
     ];
   };
 
@@ -197,21 +197,21 @@ export function VisualMetronome({
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#7C3AED' }}
+              style={{ backgroundColor: '#D4A574' }}
             />
             <Text className="text-xs text-muted">po = Golpe Adelante</Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#06B6D4' }}
+              style={{ backgroundColor: '#C9956B' }}
             />
             <Text className="text-xs text-muted">ro = Golpe Atrás</Text>
           </View>
           <View className="flex-row items-center gap-2">
             <View
               className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#10B981' }}
+              style={{ backgroundColor: '#B88456' }}
             />
             <Text className="text-xs text-muted">pero = Riscado</Text>
           </View>

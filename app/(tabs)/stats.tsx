@@ -112,10 +112,10 @@ export default function StatsScreen() {
   const rhythmComparison = generateRhythmComparisonData(sessions);
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return colors.success;
-    if (score >= 75) return '#FFA500';
-    if (score >= 60) return '#FFD700';
-    return colors.error;
+    if (score >= 90) return '#A8B89C';
+    if (score >= 75) return '#C4A876';
+    if (score >= 60) return '#C9956B';
+    return '#B89C8C';
   };
 
   const getTrendIcon = (trend: number) => {
@@ -324,7 +324,8 @@ export default function StatsScreen() {
                     </View>
 
                     {/* Barra de progreso */}
-                    <View className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: colors.border }}>
+                    <View
+                      className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: colors.border }}>
                       <View
                         style={{
                           height: '100%',
@@ -363,7 +364,7 @@ export default function StatsScreen() {
                         <View
                           style={{
                             height: '100%',
-                            backgroundColor: colors.primary,
+                            backgroundColor: '#D4A574',
                             width: `${percentage}%`,
                           }}
                         />
@@ -383,9 +384,9 @@ export default function StatsScreen() {
                   className="p-4 rounded-lg gap-3"
                   style={{
                     backgroundColor: achievement.unlocked
-                      ? `${colors.primary}20`
+                      ? '#D4A57420'
                       : colors.surface,
-                    borderColor: achievement.unlocked ? colors.primary : colors.border,
+                    borderColor: achievement.unlocked ? '#D4A574' : colors.border,
                     borderWidth: 1,
                   }}
                 >
@@ -400,7 +401,7 @@ export default function StatsScreen() {
                       </Text>
                     </View>
                     {achievement.unlocked && (
-                      <View className="bg-success px-2 py-1 rounded">
+                      <View className="px-2 py-1 rounded" style={{ backgroundColor: '#A8B89C' }}>
                         <Text className="text-xs font-bold text-white">✓</Text>
                       </View>
                     )}
@@ -416,7 +417,7 @@ export default function StatsScreen() {
                         <View
                           style={{
                             height: '100%',
-                            backgroundColor: colors.primary,
+                            backgroundColor: '#D4A574',
                             width: `${achievement.progress}%`,
                           }}
                         />
