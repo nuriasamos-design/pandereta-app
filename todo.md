@@ -168,3 +168,12 @@
 - [x] Eliminar colores estridentes
 - [x] Mantener armonía de tonos
 - [x] Actualizar tema claro y oscuro
+
+
+## Fase 20: Carga de Canciones y Generación de Patrones Personalizados
+- [x] Crear funcionalidad de carga de archivos de audio
+- [x] Implementar análisis de BPM automático
+- [x] Crear generador de patrones de ritmo personalizados
+- [x] Permitir edición de patrones generados
+- [x] Guardar canciones personalizadas con patrones
+- [x] Crear pantalla de carga y análisis de canciones
