@@ -6,6 +6,7 @@ import { Link } from "expo-router";
 import { useState, useEffect, useRef } from "react";
 import * as Haptics from "expo-haptics";
 import { Rhythm } from "@/lib/types";
+import { VisualMetronome } from "@/components/visual-metronome";
 
 const DEFAULT_RHYTHMS: Rhythm[] = [
   {
@@ -240,29 +241,13 @@ export default function PracticeScreen() {
             </View>
           </View>
 
-          {/* Metronome Button */}
-          <Pressable
-            onPress={startMetronome}
-            style={({ pressed }) => [
-              {
-                backgroundColor: isMetronomeActive ? colors.error : colors.primary,
-                opacity: pressed ? 0.9 : 1,
-                transform: [{ scale: pressed ? 0.97 : 1 }],
-              },
-            ]}
-            className="rounded-full py-4 items-center justify-center mb-6"
-          >
-            <View className="flex-row items-center gap-2">
-              <IconSymbol
-                name={isMetronomeActive ? "pause.fill" : "play.fill"}
-                size={24}
-                color="white"
-              />
-              <Text className="text-white font-semibold text-lg">
-                {isMetronomeActive ? "Pausar Metrónomo" : "Iniciar Metrónomo"}
-              </Text>
-            </View>
-          </Pressable>
+          {/* Visual Metronome */}
+          <VisualMetronome
+            bpm={bpm}
+            isActive={isMetronomeActive}
+            onToggle={startMetronome}
+            pattern={selectedRhythm.id.includes('muineira') ? 'muineira' : 'jota'}
+          />
 
           {/* Recording Button */}
           <Link
@@ -285,6 +270,32 @@ export default function PracticeScreen() {
                 <IconSymbol name="mic.fill" size={24} color={colors.primary} />
                 <Text className="text-primary font-semibold text-lg">
                   Grabar Práctica
+                </Text>
+              </View>
+            </Pressable>
+          </Link>
+
+          {/* Comparison Button */}
+          <Link
+            href={{
+              pathname: '/comparison-player',
+              params: { recordingId: selectedRhythm.id },
+            }}
+            asChild
+          >
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  opacity: pressed ? 0.9 : 1,
+                  transform: [{ scale: pressed ? 0.97 : 1 }],
+                },
+              ]}
+              className="rounded-full py-4 items-center justify-center border-2 border-success"
+            >
+              <View className="flex-row items-center gap-2">
+                <IconSymbol name="waveform" size={24} color={colors.success} />
+                <Text className="text-success font-semibold text-lg">
+                  Comparar Grabacion
                 </Text>
               </View>
             </Pressable>

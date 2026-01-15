@@ -144,3 +144,20 @@
 - [x] Crear pantalla de grabación de práctica mejorada
 - [x] Implementar puntuación de precisión
 - [ ] Guardar resultados de práctica para seguimiento
+
+
+## Fase 17: Metrónomo Visual con Sonido y Reproductor Sincronizado
+- [x] Crear metrónomo visual con animaciones
+- [x] Integrar sonido suave de metrónomo
+- [x] Mostrar patrón visual (adelante/atrás/riscado)
+- [x] Crear reproductor sincronizado de grabación vs patrón
+- [x] Visualizar diferencias de tiempo en tiempo real
+- [x] Mostrar golpes detectados vs esperados gráficamente
+
+## Fase 18: Panel de Control y Estadísticas
+- [x] Crear pantalla de estadísticas general
+- [x] Implementar gráficos de progreso por ritmo
+- [x] Mostrar mejora en precisión a lo largo del tiempo
+- [x] Crear tabla de sesiones de práctica
+- [x] Agregar estadísticas de mejor puntuación
+- [x] Implementar seguimiento de tendencias
