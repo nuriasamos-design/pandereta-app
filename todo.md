@@ -126,3 +126,11 @@
 - [x] Integrar técnicas correctas (Adelante, Atrás, Riscado, Puño)
 - [ ] Crear metrónomo con patrones de muiñeira
 - [ ] Buscar y agregar letras de canciones del curso de Xabier Díaz
+
+
+## Fase 15: Letras Educativas de Episodios del Curso
+- [x] Crear 16 letras educativas originales para cada episodio
+- [x] Vincular letras a cada episodio del curso
+- [x] Agregar canciones educativas a la biblioteca
+- [ ] Permitir reemplazo de letras con versiones oficiales
+- [x] Crear estructura de canciones por episodio

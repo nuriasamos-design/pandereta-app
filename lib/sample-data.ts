@@ -1,10 +1,12 @@
 import { Song, Recording, RecordingTranscription, SongSection, ClassSession } from './types';
+import { COURSE_SONGS } from './course-songs';
 
 /**
  * Datos de ejemplo para pruebas y demostración
  */
 
 export const SAMPLE_SONGS: Song[] = [
+  ...COURSE_SONGS,
   {
     id: 'song-1',
     title: 'Alegrías',
