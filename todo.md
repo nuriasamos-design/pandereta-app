@@ -116,3 +116,13 @@
 - [x] Crear grabaciones de ejemplo
 - [x] Agregar transcripciones de ejemplo
 - [x] Mejorar interfaz visual general
+
+
+## Fase 14: Integración de Ritmos Auténticos de Pandereta Gallega
+- [x] Actualizar biblioteca de ritmos con nombres correctos (Muiñeira, Jota, Xota, Aleluya)
+- [x] Implementar patrones rítmicos auténticos basados en Xabier Díaz
+- [x] Crear ejercicios progresivos por nivel (1-5)
+- [x] Agregar onomatopeya (poporo pero) para ayuda de aprendizaje
+- [x] Integrar técnicas correctas (Adelante, Atrás, Riscado, Puño)
+- [ ] Crear metrónomo con patrones de muiñeira
+- [ ] Buscar y agregar letras de canciones del curso de Xabier Díaz

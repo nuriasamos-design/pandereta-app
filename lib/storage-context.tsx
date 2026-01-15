@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Song, Recording, ClassSession, Rhythm, AppSettings, PracticeSession, PracticeStats } from './types';
 import { initializeSampleData } from './sample-data';
+import { SAMPLE_RHYTHMS } from './sample-rhythms';
 
 interface StorageState {
   songs: Song[];
@@ -142,7 +143,10 @@ export function StorageProvider({ children }: { children: ReactNode }) {
           const sampleData = initializeSampleData();
           return sampleData.classSessions;
         }),
-        AsyncStorage.getItem('rhythms').then(data => data ? JSON.parse(data) : []),
+        AsyncStorage.getItem('rhythms').then(data => {
+          if (data) return JSON.parse(data);
+          return SAMPLE_RHYTHMS;
+        }),
         AsyncStorage.getItem('practiceStats').then(data => data ? JSON.parse(data) : []),
         AsyncStorage.getItem('settings').then(data => data ? JSON.parse(data) : defaultSettings),
       ]);
