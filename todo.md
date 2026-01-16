@@ -177,3 +177,13 @@
 - [x] Permitir edición de patrones generados
 - [x] Guardar canciones personalizadas con patrones
 - [x] Crear pantalla de carga y análisis de canciones
+
+
+## Fase 21: Corrección de Nomenclatura de Toques (Xabier Díaz)
+- [x] Cambiar nomenclatura: "po-ro-pero" → "Ti-Co" (Ti adelante, Co atrás)
+- [x] Implementar sistema de partitura con Ti encima de línea, Co debajo
+- [x] Agregar técnicas correctas: Riscado, Puño, Sonido Grave
+- [ ] Actualizar metrónomo visual con nomenclatura correcta
+- [x] Corregir ritmos de muiñeira, jota, xota, aleluya
+- [ ] Actualizar pantalla de práctica con partitura visual
+- [ ] Actualizar análisis de práctica con toques correctos
