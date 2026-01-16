@@ -187,3 +187,14 @@
 - [x] Corregir ritmos de muiñeira, jota, xota, aleluya
 - [ ] Actualizar pantalla de práctica con partitura visual
 - [ ] Actualizar análisis de práctica con toques correctos
+
+
+## Fase 22: Visualización de Partitura con Símbolos Correctos
+- [x] Crear componente de partitura visual con línea horizontal
+- [x] Implementar símbolo de Ti (corcheta con cabeza encima de línea)
+- [x] Implementar símbolo de Co (corcheta con cabeza debajo de línea)
+- [x] Agregar símbolos para Riscado, Puño, Sonido Grave
+- [x] Mostrar partitura en pantalla de práctica
+- [x] Mostrar partitura en metrónomo visual
+- [x] Resaltar nota actual durante reproducción/práctica
+- [ ] Crear editor visual de patrones rítmicos

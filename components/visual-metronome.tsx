@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Pressable, Animated } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useColors } from '@/hooks/use-colors';
+import { RhythmNotation } from './rhythm-notation';
+import { cn } from '@/lib/utils';
 
 export interface VisualMetronomeProps {
   bpm: number;
   isActive: boolean;
   onToggle: () => void;
-  pattern?: string; // 'muineira' | 'jota' | 'basic'
+  pattern?: 'muineira' | 'jota' | 'xota' | 'aleluya' | 'basic';
 }
 
 interface BeatVisual {
   id: number;
-  type: 'po' | 'ro' | 'pero' | 'pó';
+  technique: 'Ti' | 'Co' | 'Riscado' | 'Puño' | 'Sonido Grave';
   label: string;
   color: string;
   intensity: number;
@@ -27,213 +29,165 @@ export function VisualMetronome({
   const colors = useColors();
   const [beatCount, setBeatCount] = useState(0);
   const [currentBeat, setCurrentBeat] = useState<BeatVisual | null>(null);
+  const [currentBeatIndex, setCurrentBeatIndex] = useState(0);
   const metronomeRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  // Definir patrones visuales
+  // Definir patrones con nomenclatura correcta (Ti-Co)
   const getPatternBeats = (): BeatVisual[] => {
     if (pattern === 'muineira') {
       return [
-        { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
-        { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 2, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 3, type: 'pero', label: 'pero', color: '#B88456', intensity: 0.9 },
-        { id: 4, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
-        { id: 5, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 6, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 7, type: 'pero', label: 'pero', color: '#B88456', intensity: 0.9 },
+        { id: 0, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 1, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 2, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 3, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 4, technique: 'Riscado', label: 'Riscado', color: '#B88456', intensity: 0.9 },
       ];
     } else if (pattern === 'jota') {
       return [
-        { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
-        { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 2, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
-        { id: 3, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-        { id: 4, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
+        { id: 0, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 1, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 2, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 3, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 4, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+      ];
+    } else if (pattern === 'xota') {
+      return [
+        { id: 0, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 1, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 2, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 3, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 4, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 5, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+      ];
+    } else if (pattern === 'aleluya') {
+      return [
+        { id: 0, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 1, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 2, technique: 'Riscado', label: 'Riscado', color: '#B88456', intensity: 0.9 },
+        { id: 3, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
+        { id: 4, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+      ];
+    } else {
+      // Patrón básico: Ti-Co
+      return [
+        { id: 0, technique: 'Ti', label: 'Ti', color: '#D4A574', intensity: 1 },
+        { id: 1, technique: 'Co', label: 'Co', color: '#C9956B', intensity: 0.8 },
       ];
     }
-    return [
-      { id: 0, type: 'po', label: 'po', color: '#D4A574', intensity: 1 },
-      { id: 1, type: 'ro', label: 'ro', color: '#C9956B', intensity: 0.8 },
-    ];
   };
 
-  const patternBeats = getPatternBeats();
+  const beats = getPatternBeats();
+  const beatDuration = (60 / bpm) * 1000; // Duración de cada beat en ms
 
-  // Efecto de animación de escala
   useEffect(() => {
-    if (currentBeat) {
-      scaleAnim.setValue(1.2);
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-      }).start();
-    }
-  }, [currentBeat]);
+    if (isActive) {
+      metronomeRef.current = setInterval(() => {
+        const nextIndex = (currentBeatIndex + 1) % beats.length;
+        setCurrentBeatIndex(nextIndex);
+        setCurrentBeat(beats[nextIndex]);
+        setBeatCount((prev) => prev + 1);
 
-  // Controlar metrónomo
-  useEffect(() => {
-    if (!isActive) {
+        // Haptic feedback
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      }, beatDuration);
+    } else {
       if (metronomeRef.current) {
         clearInterval(metronomeRef.current);
-        metronomeRef.current = null;
       }
-      return;
     }
-
-    const beatDuration = (60 / bpm) * 1000;
-    let count = 0;
-
-    metronomeRef.current = setInterval(() => {
-      const beat = patternBeats[count % patternBeats.length];
-      setCurrentBeat(beat);
-      setBeatCount(count);
-
-      // Haptic feedback
-      if (beat.type === 'po' || beat.type === 'pero') {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-      } else {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      }
-
-      count++;
-    }, beatDuration);
 
     return () => {
       if (metronomeRef.current) {
         clearInterval(metronomeRef.current);
       }
     };
-  }, [isActive, bpm, pattern, patternBeats]);
+  }, [isActive, beatDuration, beats, currentBeatIndex]);
+
+  const patternNames = beats.map((b) => b.technique);
 
   return (
-    <View className="gap-4">
-      {/* Visualización de golpe actual */}
-      <View className="items-center justify-center gap-4">
-        {/* Círculo grande de animación */}
-        <Animated.View
-          style={{
-            transform: [{ scale: scaleAnim }],
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            backgroundColor: currentBeat
-              ? currentBeat.color
-              : colors.surface,
-            opacity: currentBeat ? 0.3 : 0.1,
-          }}
-        />
+    <View className="gap-6 p-4">
+      {/* Partitura Visual */}
+      <RhythmNotation
+        pattern={patternNames}
+        currentIndex={currentBeatIndex}
+        size="medium"
+        showLabels={true}
+      />
 
-        {/* Información del golpe actual */}
+      {/* Indicador Visual del Beat Actual */}
+      <View className="items-center gap-4">
+        <View
+          className="w-24 h-24 rounded-full items-center justify-center border-4"
+          style={{
+            borderColor: currentBeat?.color || colors.primary,
+            backgroundColor: currentBeat ? `${currentBeat.color}20` : 'transparent',
+          }}
+        >
+          <Text
+            className="text-3xl font-bold"
+            style={{
+              color: currentBeat?.color || colors.primary,
+            }}
+          >
+            {currentBeat?.label || '—'}
+          </Text>
+        </View>
+
+        {/* Información del Beat */}
         {currentBeat && (
-          <View className="items-center gap-2">
-            <Text className="text-4xl font-bold" style={{ color: currentBeat.color }}>
-              {currentBeat.label.toUpperCase()}
+          <View className="items-center gap-1">
+            <Text className="text-lg font-semibold text-foreground">
+              {currentBeat.technique}
             </Text>
             <Text className="text-sm text-muted">
-              {currentBeat.type === 'po'
-                ? 'Golpe Adelante'
-                : currentBeat.type === 'ro'
-                  ? 'Golpe Atrás'
-                  : currentBeat.type === 'pero'
-                    ? 'Riscado'
-                    : 'Puño Acentuado'}
+              BPM: {bpm} | Beat: {currentBeatIndex + 1}/{beats.length}
             </Text>
           </View>
         )}
-
-        {/* BPM actual */}
-        <Text className="text-lg font-semibold text-foreground">
-          {bpm} BPM
-        </Text>
       </View>
 
-      {/* Patrón visual completo */}
-      <View
-        className="p-4 rounded-lg gap-3"
-        style={{ backgroundColor: colors.surface }}
+      {/* Botón de Control */}
+      <Pressable
+        onPress={onToggle}
+        className={cn(
+          'py-3 px-6 rounded-lg items-center justify-center',
+          isActive ? 'bg-error' : 'bg-primary'
+        )}
       >
-        <Text className="text-sm font-semibold text-foreground">Patrón:</Text>
-        <View className="flex-row gap-2 flex-wrap">
-          {patternBeats.map((beat, index) => (
+        <Text className="text-base font-semibold text-background">
+          {isActive ? 'Detener' : 'Iniciar'} Metrónomo
+        </Text>
+      </Pressable>
+
+      {/* Información de Técnicas */}
+      <View className="bg-surface rounded-lg p-4 gap-2">
+        <Text className="text-sm font-semibold text-foreground mb-2">
+          Patrón: {pattern.charAt(0).toUpperCase() + pattern.slice(1)}
+        </Text>
+        <View className="gap-1">
+          {beats.map((beat) => (
             <View
               key={beat.id}
-              className="flex-1 min-w-[45px] items-center justify-center p-2 rounded-lg"
-              style={{
-                backgroundColor:
-                  currentBeat?.id === beat.id
-                    ? beat.color
-                    : `${beat.color}20`,
-                borderWidth: currentBeat?.id === beat.id ? 2 : 0,
-                borderColor: beat.color,
-              }}
+              className={cn(
+                'flex-row items-center gap-2 p-2 rounded',
+                currentBeatIndex === beat.id && 'bg-primary/20'
+              )}
             >
-              <Text
-                className="font-bold text-xs"
-                style={{
-                  color:
-                    currentBeat?.id === beat.id
-                      ? '#fff'
-                      : beat.color,
-                }}
-              >
-                {beat.label}
+              <View
+                className="w-4 h-4 rounded-full"
+                style={{ backgroundColor: beat.color }}
+              />
+              <Text className="text-xs text-foreground flex-1">
+                {beat.technique}
+              </Text>
+              <Text className="text-xs text-muted">
+                {beat.id + 1}/{beats.length}
               </Text>
             </View>
           ))}
         </View>
       </View>
-
-      {/* Leyenda de técnicas */}
-      <View
-        className="p-3 rounded-lg gap-2"
-        style={{ backgroundColor: colors.surface }}
-      >
-        <Text className="text-xs font-semibold text-foreground mb-2">
-          Técnicas:
-        </Text>
-        <View className="gap-1">
-          <View className="flex-row items-center gap-2">
-            <View
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#D4A574' }}
-            />
-            <Text className="text-xs text-muted">po = Golpe Adelante</Text>
-          </View>
-          <View className="flex-row items-center gap-2">
-            <View
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#C9956B' }}
-            />
-            <Text className="text-xs text-muted">ro = Golpe Atrás</Text>
-          </View>
-          <View className="flex-row items-center gap-2">
-            <View
-              className="w-3 h-3 rounded-full"
-              style={{ backgroundColor: '#B88456' }}
-            />
-            <Text className="text-xs text-muted">pero = Riscado</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Botón de control */}
-      <Pressable
-        onPress={onToggle}
-        style={({ pressed }) => [
-          {
-            backgroundColor: isActive ? colors.error : colors.success,
-            padding: 16,
-            borderRadius: 12,
-            opacity: pressed ? 0.8 : 1,
-          },
-        ]}
-      >
-        <Text className="text-center font-semibold text-white text-lg">
-          {isActive ? 'Detener Metrónomo' : 'Iniciar Metrónomo'}
-        </Text>
-      </Pressable>
     </View>
   );
 }
